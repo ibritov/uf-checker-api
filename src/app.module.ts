@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserCheckModule } from './user-check/user-check.module';
+import { CmfChileService } from './cmf-chile/cmf-chile.service';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { UserCheckModule } from './user-check/user-check.module';
     UsersModule, UserCheckModule, 
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CmfChileService],
 })
 export class AppModule {}

@@ -12,11 +12,14 @@ export class UserCheck {
     ufDate: Date
 
     @Prop({ type: Number, required: true })
+    cantUf: number
+    
+    @Prop({ type: Number, required: true })
     ufValue: number
 
     @Prop({ type: Number, required: true })
-    ufConverted: number
+    amountConverted: number
 }
 
 
-export const UserCheckSchema = SchemaFactory.createForClass(User)
+export const UserCheckSchema = SchemaFactory.createForClass(UserCheck)

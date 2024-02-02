@@ -1,13 +1,16 @@
-import { Body, Injectable, Post } from '@nestjs/common';
+import {  Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserCheck } from 'src/schemas/user-check.shema';
 import { UsersService } from 'src/users/users.service';
+import { CreateUserCheckDto } from './dto/create-user-check.dto';
+import { CmfChileService } from 'src/cmf-chile/cmf-chile.service';
 
 @Injectable()
 export class UserCheckService {
     constructor(@InjectModel(UserCheck.name) private userCheckModel: Model<UserCheck>,
-        private readonly usersService: UsersService
+        private readonly usersService: UsersService,
+        private readonly cmfChileService: CmfChileService
     ) { }
 
     async getAllWithUsername() {
@@ -26,6 +29,10 @@ export class UserCheckService {
         return usersChecksWithUserName
     }
 
-   // @Post()
-    //async create(@Body)
+    async create(createUserCheck : CreateUserCheckDto) {
+        createUserCheck.ufDate = new Date(createUserCheck.ufDate);
+        const newUserCheck = new this.userCheckModel(createUserCheck)
+        return newUserCheck.save()
+        
+    }
 }

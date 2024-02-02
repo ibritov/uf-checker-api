@@ -1,22 +1,16 @@
+import { Transform, Type } from "class-transformer";
 import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class CreateUserCheckDto {
+export class PreCreateUserCheckDto {
     @IsString()
     @IsNotEmpty()
     userId: string
 
     @IsDate()
-    ufDate: Date
-
-    @IsNumber()
-    @IsNotEmpty()
-    ufValue: number
+    @Type( () => Date)
+    date: Date
 
     @IsNumber()
     @IsNotEmpty()
     cantUf: number
-
-    @IsNumber()
-    @IsNotEmpty()
-    amountConverted: number
 }
