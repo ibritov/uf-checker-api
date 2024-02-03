@@ -1,19 +1,22 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserCheckService } from './user-check.service';
 import { CreateUserCheckDto } from './dto/create-user-check.dto';
 import { CmfChileService } from 'src/cmf-chile/cmf-chile.service';
 import { PreCreateUserCheckDto } from './dto/pre-create-user-check.dto';
 import { format } from 'date-fns';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('user-check')
 export class UserCheckController {
     constructor(private usercheckService: UserCheckService,private cmfChileService: CmfChileService) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     async getAll() {
         return this.usercheckService.getAllWithUsername()
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     async create(@Body() preUserCheck: PreCreateUserCheckDto) {
         //const userCheckDate = preUserCheck.date
