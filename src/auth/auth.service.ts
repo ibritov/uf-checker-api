@@ -26,7 +26,8 @@ export class AuthService {
 
         const data = {
             userName: findUser.username,
-            roler: findUser.role,
+            userId: findUser._id,
+            role: findUser.role,
             token
         }
         return data
